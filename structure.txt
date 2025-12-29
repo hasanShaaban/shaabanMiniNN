@@ -1,0 +1,41 @@
+MiniNN/
+│
+├── layers/
+│   ├── layer.py              
+│   ├── dense.py
+│   ├── dropout.py
+│   ├── batchnorm.py
+│   └── activations/
+│       ├── activation.py
+│       ├── linear.py
+│       ├── relu.py
+│       ├── sigmoid.py
+│       └── tanh.py
+│
+├── losses/
+│   ├── loss.py
+│   ├── mse.py
+│   └── softmax_cross_entropy.py
+│
+├── optimizers/
+│   ├── optimizer.py
+│   ├── sgd.py
+│   ├── momentum.py
+│   ├── adagrad.py
+│   └── adam.py
+│
+├── models/
+│   └── neural_network.py
+│
+├── training/
+│   ├── trainer.py
+│   └── hyperparameter_tuning.py
+│
+├── utils/
+│   ├── initialization.py
+│   └── metrics.py
+│
+├── examples/
+│   └── train_iris.py
+│
+└── README.md

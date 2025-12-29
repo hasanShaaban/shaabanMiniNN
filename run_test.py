@@ -1,11 +1,14 @@
 from nn_lib.layers.activations.relu import ReLU
 from nn_lib.layers.dense import Dense
+from nn_lib.losses.sofmax_cross_entropy import SoftMaxCrossEntropy
 import numpy as np
 
+logits = np.array([[0.0004,2,0.2]])
+y = np.array([1])
 
-x = np.random.randn(10, 3)
-dense = Dense(3, 5)
-relu = ReLU()
-out = dense.forward(x)
-act = relu.forward(out)
-print(act)
+func = SoftMaxCrossEntropy()
+loss = func.forward(logits, y)
+grad = func.backward()
+
+print(loss)
+print(grad)

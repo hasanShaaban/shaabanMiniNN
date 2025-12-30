@@ -22,8 +22,9 @@ class Dense(Layer):
         W = self.params['W']
         x = self.X
 
-        dW = x.T @ dout
         dx = dout @ W.T
+        dW = x.T @ dout
+        
         db = np.sum(dout, axis=0)
 
         self.grads['W'] = dW

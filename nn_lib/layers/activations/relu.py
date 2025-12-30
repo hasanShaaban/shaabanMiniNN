@@ -7,6 +7,6 @@ class ReLU(Activation):
         return np.maximum(0, x)
     
     def _derivative(self):
-        return (self.x > 0).astype(self.x.dtype)
+        return (self.x > 0).astype(float)
      
 

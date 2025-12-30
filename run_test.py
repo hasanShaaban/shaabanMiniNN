@@ -1,26 +1,24 @@
 from nn_lib.layers.activations.relu import ReLU
+from nn_lib.layers.activations.sigmoid import Sigmoid
 from nn_lib.layers.dense import Dense
-from nn_lib.losses.sofmax_cross_entropy import SoftMaxCrossEntropy
+from nn_lib.losses.mse import MeanSquaredError
 from nn_lib.models.neural_network import NeuralNetwork
+from nn_lib.models.sequential import Sequential
+from nn_lib.optimizers.sgd import SGD
 import numpy as np
+from nn_lib.utils.numerical_grad import gradient_check
 
-net = NeuralNetwork()
+np.random.seed(0)
 
-net.add(Dense(2,5))
-net.add(ReLU())
-net.add(Dense(5,3))
+model = Sequential([
+    Dense(3,5),
+    ReLU(),
+    Dense(5,2)
+])
 
-net.add(ReLU())
+loss_fn = MeanSquaredError()
 
+x = np.random.randn(5,3)
+y = np.random.randn(5,2)
 
-x = np.random.randn(5,2)
-out = net.forward(x)
-
-func = SoftMaxCrossEntropy()
-target = np.array([[2], [1], [1], [3], [3]])
-loss = func.forward(out, target)
-params = net.get_params()
-
-print(out)
-print(loss)
-print(params)
+gradient_check(model, loss_fn, x, y)

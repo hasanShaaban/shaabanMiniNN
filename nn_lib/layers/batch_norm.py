@@ -54,7 +54,7 @@ class BatchNormalization(Layer):
 
         dx_hat = dout * gamma
 
-        dvar = np.sun(
+        dvar = np.sum(
             dx_hat * (x - mu) * -0.5 * (var + self.eps) ** (-1.5),
             axis=0
         )

@@ -23,8 +23,8 @@ class Trainer:
             epoch_loss = 0
 
             for i in range(0, n_samples, self.batch_size):
-                X_batch = X[i,i + self.batch_size]
-                y_batch = y[i,i + self.batch_size]
+                X_batch = X[i:i + self.batch_size]
+                y_batch = y[i:i + self.batch_size]
 
                 scores = self.model.forward(X_batch)
 

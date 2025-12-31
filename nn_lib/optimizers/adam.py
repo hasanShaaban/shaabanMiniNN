@@ -15,14 +15,18 @@ class Adam(Optimizer):
     def update(self, params, grads):
         self.t += 1
         for key in params:
-            if key not in self.m:
-                self.m[key] = np.zeros_like(params[key])
-                self.v[key] = np.zeros_like(params[key])
+            param = params[key]
+            grad = grads[key]
 
-            self.m[key] = (self.beta1 * self.m[key] + (1-self.beta1) * grads[key])
-            self.v[key] = (self.beta2 * self.v[key] + (1-self.beta2) * (grads[key]**2))
+            pid = id(param)
+            if pid not in self.m:
+                self.m[pid] = np.zeros_like(param)
+                self.v[pid] = np.zeros_like(param)
 
-            m_hat = self.m[key] / (1-self.beta1 ** self.t)
-            v_hat = self.v[key] / (1-self.beta2 ** self.t)
+            self.m[pid] = (self.beta1 * self.m[pid] + (1-self.beta1) * grad)
+            self.v[pid] = (self.beta2 * self.v[pid] + (1-self.beta2) * (grad**2))
 
-            params[key] -= (self.lr * m_hat/ (np.sqrt(v_hat) + self.eps))
+            m_hat = self.m[pid] / (1-self.beta1 ** self.t)
+            v_hat = self.v[pid] / (1-self.beta2 ** self.t)
+
+            param -= (self.lr * m_hat/ (np.sqrt(v_hat) + self.eps))
